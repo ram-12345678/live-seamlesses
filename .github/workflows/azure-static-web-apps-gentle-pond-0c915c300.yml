@@ -26,21 +26,23 @@ jobs:
           node-version: '16'  # Ensure this matches your project requirements
 
       - name: Install dependencies
-        run: yarn install  # Use `npm install` if you are using npm
+        working-directory: ./streaming-react-app  # Streaming-react-app directory mein jao
+        run: yarn install  # npm install use karo agar npm use kar rahe ho
 
       - name: Build the app
-        run: yarn build  # This will run `vite build` as per your package.json
+        working-directory: ./streaming-react-app  # Streaming-react-app directory mein jao
+        run: yarn build  # Yeh `vite build` run karega jaise tumhare package.json mein likha hai
 
       - name: Deploy to Azure Static Web Apps
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}  # Used for Github integrations (i.e., PR comments)
+          repo_token: ${{ secrets.GITHUB_TOKEN }}  # Github integrations ke liye (i.e., PR comments)
           action: "upload"
-          app_location: "/streaming-react-app"  # Path to your application source code
+          app_location: "streaming-react-app"  # Application source code ka path
           api_location: ""  # Api source code path - optional
-          output_location: "dist"  # Built app content directory
+          output_location: "streaming-react-app/dist"  # Built app content directory
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
