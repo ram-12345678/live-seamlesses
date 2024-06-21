@@ -26,12 +26,12 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        working-directory: ./streaming-react-app
+        working-directory: /home/runner/work/live-seamlesses/live-seamlesses/streaming-react-app
         run: |
           yarn install --frozen-lockfile  # Ensure consistent dependency installation
 
       - name: Build the app
-        working-directory: ./streaming-react-app
+        working-directory: /github/workspace/swa-db-connections
         run: |
           yarn build  # Run the build script as specified in your package.json
 
